@@ -82,7 +82,7 @@ export default {
   },
   mounted() {
     if (this.token) {
-      this.$store.dispatch("getUserInfo", {
+      this.$store.dispatch("user/getUserInfo", {
         // 发起请求
         token: this.token,
       });
@@ -97,7 +97,7 @@ export default {
   computed: {
     userList() {
       // 获取用户数据
-      return this.$store.state.userList;
+      return this.$store.state.user.userList;
     },
   },
   methods: {
@@ -116,7 +116,7 @@ export default {
       this.nameShow = false
     },
     saveUserInfo() { // 点击保存资料
-      this.$store.dispatch('updateUser', {
+      this.$store.dispatch('user/updateUser', {
         token: this.token,
         nickName: this.nameValue,
         sex: this.sex

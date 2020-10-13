@@ -38,7 +38,7 @@ export default {
         : "编辑收货地址";
     },
     editAddress() {
-      return this.$store.state.editAddress
+      return this.$store.state.address.editAddress
     }
   },
   mounted() {
@@ -51,7 +51,7 @@ export default {
       // content为表单内容
       if (this.who === "add") {
         // 如果是add，就发起新增的请求
-        this.$store.dispatch("addAddressList", {
+        this.$store.dispatch("address/addAddressList", {
           // 发起新增的请求
           token: this.token,
           getName: content.name,
@@ -65,7 +65,7 @@ export default {
         });
       } else {
         // 反之就发起编辑的请求
-        this.$store.dispatch('updateAddressList', {
+        this.$store.dispatch('address/updateAddressList', {
 
         })
       }

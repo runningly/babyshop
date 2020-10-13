@@ -94,11 +94,11 @@ export default {
         this.use = true;
       }
       // 调用vuex里的异步任务
-      this.$store.dispatch("getCode", this.phone);
+      this.$store.dispatch("goLogin/getCodeInfo", this.phone);
     },
     // 登录的点击事件
     loginClick() {
-      this.$store.dispatch("login", {
+      this.$store.dispatch("goLogin/login", {
         phone: this.phone,
         code: this.code,
       });
@@ -106,7 +106,7 @@ export default {
   },
   computed: {
     loginList() {
-      return this.$store.state.loginList;
+      return this.$store.state.goLogin.loginList;
     },
   },
   mounted() {

@@ -108,7 +108,7 @@ export default {
   mounted() {
     if (this.token) {
       this.login = true;
-      this.$store.dispatch('getUserInfo', { // 发起请求
+      this.$store.dispatch('user/getUserInfo', { // 发起请求
         token: this.token
       })
     }else {
@@ -117,7 +117,7 @@ export default {
   },
   computed: {
     userList() { // 获取用户数据
-      return this.$store.state.userList;
+      return this.$store.state.user.userList;
     },
   },
 

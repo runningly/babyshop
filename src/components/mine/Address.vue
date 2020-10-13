@@ -29,24 +29,24 @@ export default {
   },
   methods: {
     onAdd() { // 添加新的收货地址
-      this.$router.push("/addaddress/add");
+      this.$router.push("addaddress/add");
     },
     onEdit(item) {// 编辑新的收货地址
-    this.$store.state.editAddress = item // 将当前的item保存到vuex中
+    this.$store.state.address.editAddress = item // 将当前的item保存到vuex中
 
-      this.$router.push('/addaddress/edit')
+      this.$router.push('addaddress/edit')
     },
   },
   mounted() {
     if (this.token) {
-      this.$store.dispatch("getAddressList", {
+      this.$store.dispatch("address/getAddressList", {
         token: this.token,
       });
     }
   },
   computed: {
     AddressList() {
-      return this.$store.state.AddressList;
+      return this.$store.state.address.AddressList;
     },
   },
   watch: {

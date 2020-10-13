@@ -150,15 +150,15 @@ export default {
     this.getBannerList();
   },
   computed: {
-    ...mapState({
-      bannerList: "bannerList",
-      reCommendList: "reCommendList",
-      page: "page",
+    ...mapState('home',{ // 将home模块里的vuex的状态映射过来
+      bannerList: state => state.bannerList,
+      reCommendList: state => state.reCommendList,
+      page: state => state.page,
     }),
   },
 
   methods: {
-    ...mapActions(["getBannerList", "getRecommendList"]), // 将vuex里的异步方法映射到methods
+    ...mapActions('home',["getBannerList", "getRecommendList"]), // 将vuex里的异步方法映射到methods
 
     onRefresh() {
       setTimeout(() => {

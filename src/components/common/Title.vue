@@ -3,7 +3,7 @@
     <van-nav-bar
       :title="name"
       :left-arrow="arrow"
-      :fixed="fixed"
+      :fixed=fixed
       :placeholder=true
       @click-left="onClickLeft"
       :border=border
@@ -16,19 +16,19 @@ export default {
   props: {
     name: {
       type: String,
-      defult: "商品",
+      default: "商品",
     },
     arrow: {
       type: Boolean,
-      defult: false,
+      default: false,
     },
     fixed: {
       type: Boolean,
-      defult: true
+      default: true
     },
     border: {
       type: Boolean,
-      defult: true
+      default: true
     }
   },
 

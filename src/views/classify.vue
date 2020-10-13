@@ -47,13 +47,13 @@ export default {
 
   computed: {
     classifyList() {
-      return this.$store.state.classifyList; // 获取vuex 里的数据
+      return this.$store.state.classify.classifyList; // 获取vuex 里的数据
     },
   },
 
   mounted() {
     // 调用 vuex中的异步任务
-    this.$store.dispatch("getClassifyList", {
+    this.$store.dispatch("classify/getClassifyList", {
       type: this.type,
     });
   },
@@ -65,7 +65,7 @@ export default {
       sessionStorage.setItem("activeKey", this.activeKey);
       sessionStorage.setItem("type", this.type);
 
-      this.$store.dispatch("getClassifyList", { // 根据当前 type发起请求 
+      this.$store.dispatch("classify/getClassifyList", { // 根据当前 type发起请求 
         type: this.type,
       });
     },

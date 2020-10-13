@@ -8,29 +8,29 @@
       class="my-swipe"
       :autoplay="5000"
       indicator-color="white"
-      v-if="datailInfo.imgArr"
+      v-if="thisDetailList.imgArr"
       @change="onChange"
     >
-      <van-swipe-item v-for="(item, index) in datailInfo.imgArr" :key="index">
+      <van-swipe-item v-for="(item, index) in thisDetailList.imgArr" :key="index">
         <img v-lazy="item" alt="" />
       </van-swipe-item>
 
       <template #indicator>
         <div class="custom-indicator">
-          {{ current + 1 }}/{{ datailInfo.imgArr.length }}
+          {{ current + 1 }}/{{ thisDetailList.imgArr.length }}
         </div>
       </template>
     </van-swipe>
 
     <!-- 内容区域 -->
-    <van-cell-group v-if="datailInfo">
+    <van-cell-group v-if="thisDetailList">
       <van-cell :border="false">
         <!-- 自定义左边标题 -->
         <template #title>
           <div class="currentPrice">
             <span class="rmb">￥</span>
             <span class="now">
-              {{ datailInfo.currentPrice | twoRMB }}
+              {{ thisDetailList.currentPrice | twoRMB }}
             </span>
             <span class="vip">会员专享</span>
           </div>
@@ -38,7 +38,7 @@
         <!-- 自定义标题下方 label 的内容 -->
         <template #label>
           <div class="descriptor">
-            普通价格 {{ datailInfo.originalPrice | twoRMB }}
+            普通价格 {{ thisDetailList.originalPrice | twoRMB }}
           </div>
         </template>
       </van-cell>
@@ -46,13 +46,13 @@
       <van-cell class="two-cell" :border="false">
         <template #title>
           <div class="productName">
-            {{ datailInfo.productName }}
+            {{ thisDetailList.productName }}
           </div>
         </template>
 
         <template #label>
           <div class="describe">
-            {{ datailInfo.describe }}
+            {{ thisDetailList.describe }}
           </div>
         </template>
       </van-cell>
@@ -105,8 +105,8 @@
     <van-sku
       v-model="show"
       :sku="sku"
-      :goods="datailInfo.standards"
-      :goods-id="datailInfo._id"
+      :goods="detailInfo.standards"
+      :goods-id="detailInfo._id"
  
     />
      <!-- @buy-clicked="onBuyClicked"
@@ -237,19 +237,26 @@ export default {
       goods: { // 商品信息
 
       },
+      thisDetailList: []
     };
   },
   created() {
     this.productId = this.$route.params.id; // 将当前路由id，存储到data中
   },
   mounted() {
-    this.$store.dispatch("getDetailList", {
+    this.thisDetailList = [] // 初始化数据
+    this.$store.dispatch("detail/getDetailList", {
       productId: this.productId, // 发起请求
     });
   },
+  watch: { // 侦听请求过来数据的变化
+    detailInfo() {
+      this.thisDetailList = this.detailInfo
+    }
+  },
   computed: {
-    datailInfo() {
-      return this.$store.state.datailInfo;
+    detailInfo() {
+      return this.$store.state.detail.detailInfo;
     },
   },
   // 动态参数id改变时触发，可用来实现’今日热卖‘的功能
@@ -259,11 +266,9 @@ export default {
   methods: {
     onChange(index) {
       this.current = index;
-      console.log();
     },
     change() {
       this.show = true
-      console.log(1);
     }
   },
 
